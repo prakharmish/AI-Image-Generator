@@ -5,132 +5,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Image Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container">
-        <div class="header">
-            <h1>AI Image Generator</h1>
-            <p>Create Stunning images from text prompts using AI</p>
-        </div>
-
-        <div class="generator-section">
-            <div class="input">
-                <label for="promt">Enter your image description</label>
-
-                <textarea class="promt-input" id="promt"
-                    placeholder="Describe the image you want to generate...(e.g., 'Man walking down the streets')"></textarea>
-            </div>
-        </div>
-
-        <div class="controls">
-            <div class="control-group">
-                <label for="style">Art Style</label>
-                <select name="" id="style" class="control-input">
-                    <option value="realistic">realistic</option>
-                    <option value="artistic">artistic</option>
-                    <option value="cartoon">cartoon</option>
-                    <option value="abstract">abstract</option>
-                    <option value="cyberpunk">cyberpunk</option>
-                    <option value="vintage">vintage</option>
-                </select>
-            </div>
-
-            <div class="control-group">
-                <label for="resolution">Resolution</label>
-                <select name="" id="resolution class=" control-input">
-                    <option value="512 x 512">512 x 512</option>
-                    <option value="768 x 768">768 x 768</option>
-                    <option value="1024 x 1024">1024 x 1024</option>
-                    <option value="1536 x 1024">1536 x 1024</option>
-
-                </select>
-            </div>
-
-            <div class="control-group">
-                <label for="quality">Quality</label>
-                <select name="" id="quality" class="control-input">
-                    <option value="Standard">Standard</option>
-                    <option value="High">High</option>
-                    <option value="Ultra">Ultra</option>
-                </select>
-            </div>
-
-            <div class="control-group">
-                <label for="count">Number of Images</label>
-                <select name="" id="style" class="control-input">
-                    <option value="1">1 Image</option>
-                    <option value="2">2 Images</option>
-                    <option value="4">4 Images</option>
-                </select>
-            </div>
-
-            <button class="generate-btn" id="generateBtn">
-                <span class="loading-spinner"></span>
-                <span class="btn-text">Generate Image</span>
-            </button>
-        </div>
-
-        <div class="results-section">
-            <div class="results-header">
-                <h2>Generated Images</h2>
-            </div>
-
-            <div id="results">
-                <div class="placeholder">
-                    <svg class="placeholder-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
-                    </svg>
-                    <p>Your generated images will appear here</p>
-                    <p style="font-size: 0.8rem; margin-top: 0.5rem;">Enter a promt above and click "Generated Images"
-                        to get started</p>
-
+        <!---Header--->
+        <header class="header">
+            <div class="logo-wrapper">
+                <div class="logo">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
 
                 </div>
+                <h1>AI Image Generator</h1>
             </div>
-        </div>
-    </div>
 
-    <div class="image-container" style="position: relative; overflow: hidden;">
-
-        <img src="${imageUrl}" alt="Generated Image: ${promt}"
-            style="width:100%; height: 300px; object-fit: cover;border-radius: 8px 8px 0 0; transform: 0.3s ease; "
-            onload="this.style.opacity='1'" onerror="" this.parentElement.innterHTML='<div class=\\'
-            image-placeholder\\'>Failed to generated image
-    </div>'"
-    loading="lazy"
-    />
-
-    <div class="image-overlay"
-        style="position: absolute; top: 0; left: 0; right:  0; bottom:  0; background: rgba(0, 0, 0, 0.7); opacity: 0; transition:  0.3s ease; display: flex; align-items: center; color: white; font-size: 0.9rem;">
-        Click to view full size
-    </div>
-
-
-
-    </div>
-
-    <div class="image-info">
-        <div class="image-promt">${promt}</div>
-        <div class="image-details">
-            <span>${resolution}</span>
-            <span>${style}</span>
-            <span>${quality}</span>
-        </div>
-
-        <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem;">
-            <button onclick="downloadimage('${imageUrl}', '${promt.substring(0,30)}')"
-                style="flex: 1; padding: 0.5rem; background: #4a9eff; color: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
-                Download
+            <button class="theme-toggle">
+                <i class="fa-solid fa-moon"></i>
             </button>
+        </header>
+
+        <div class="main-content">
+            <form action="#" class="promt-content">
+                <!--Promt Container--->
+                <div class="promt-container">
+                    <textarea class="promt-input" placeholder="Describe your imagination in detail..." required
+                        autofoces></textarea>
+                    <button type="button" class="promt-btn">
+                        <i class="fa-solid fa-dice"></i>
+                    </button>
+                </div>
+                <!---Promt Actions/Buttons-->
+                <div class="promt-action">
+                    <div class="select-wrapper">
+                         <select class="custom-select" requierd>
+                            <option value="" selected disabled>Select Model</option>
+                            <option value="black-forest-labs/FLUX.1-dev">FLUX.1-dev</option>
+                            <option value="black-forest-labs/FLUX.1-schnell">FLUX.1-schnell</option>
+                            <option value="stabilityai/stable-diffusion-xl-base-1.0">Stable Diffusion XL</option>
+                            <option value="runwayml/stable-diffusion-v1-5">Stable Diffusion v1.5</option>
+                            <option value="prompthero/openjourney">Openjourney</option>
+                        </select>
+                    </div>
+                    <div class="select-wrapper" requierd>
+                        <select class="custom-select">
+                            <option value="" selected disabled>Image Count</option>
+                            <option value="1">1 Image</option>
+                            <option value="2">2 Images</option>
+                            <option value="3">3 Images</option>
+                            <option value="4">4 Images</option>
+                        </select>
+                </div>
+                <div class="select-wrapper" requierd>
+                    <select class="custom-select">
+                        <option value="" selected disabled>Aspect Ratio</option>
+                        <option value="1/1">Square (1:1)</option>
+                        <option value="16/9">Landscape (16:9)</option>
+                        <option value="9/16">Portrait (9:16)</option>
+                    </select>
+                </div>
+                <button type="submit" class="generate-btn">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    Generate
+                </button>
+            </div>
+            </form>
         </div>
     </div>
 
 
 
-    <script src="script.js"></script>
+
+
 </body>
 
 </html>
